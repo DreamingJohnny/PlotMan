@@ -45,6 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a87e0ca6bc07f444b41dc44db7d5148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridWidth: 18
+  gridHeight: 18
+  cellSize: 3.15
+  startingOffset: {x: -28.6, y: -28.6}
 --- !u!114 &279597268299318579
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,10 +37,22 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] private float waitTime;
 	private float timeWaited;
 
+	[SerializeField] private Grid grid;
+
 	private void Start() {
 		rigidBody2D = GetComponent<Rigidbody2D>();
 
 		moves = new Queue<Vector2>();
+
+		//So, could it get this from the gameHandler, or level, instead then?
+		//Have a reference to the level, and have the level hold the grid, and be able to send and receive via that?
+		PortToStartPosition();
+	}
+
+	//TODO: See if this is better moved to gameHandler who could ask levelHandler about it further on.
+	private void PortToStartPosition() {
+		transform.position = grid.GetCellMidPoint(0, 0);
+		Debug.Log(transform.position);
 	}
 
 	//So, a function for signing up for the event, and for unsubscribing, and yeah, the move, right, so it receives it, and then unsubscribes.
