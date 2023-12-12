@@ -11,7 +11,7 @@ public class Grid
 	private int height;
 	private float cellSize;
 
-	private int[,] cells;
+	private Cell[,] cells;
 
 	private Vector2 startPoint;
 
@@ -20,9 +20,24 @@ public class Grid
 		this.height = height;
 		this.cellSize = cellSize;
 
-		cells = new int[this.width, this.height];
+		cells = new Cell[this.width, this.height];
 
 		this.startPoint = startPoint;
+
+		SetUpCells();
+	}
+
+	private void SetUpCells() {
+		//Double loop here, going through all of the cells, give each cell it's midpoint, and other values, one by one.
+		//Later on we will want this one to read off a data, probably a scriptable object, as it sets the values of the grid.
+		//So, this one, maybe it should reset the whole array of cells as it begins? So that we can be sure that they are correct etc.
+
+		for (int x = 0; x < cells.GetLength(0); x++) {
+			for (int y = 0; y < cells.GetLength(1); y++) {
+				//So here we'll want to take each cell, and give it all of the values that it wants.
+				cells[x, y] = new Cell(GetCellMidPoint(x, y), 0, true, true, true, true);
+			}
+		}
 	}
 
 	public void DebugShowTextOnCells() {
@@ -34,12 +49,13 @@ public class Grid
 	}
 
 	//TODO: Check on this later...
+	//So, this one can be calculated here, but it should be given to the cell, as its midpoint, as the cell is created.
 	public Vector2 GetCellMidPoint(int width, int height) {
 		//This needs to check if width and height is within the bounds of the grid before it does anything else!
 
 		Vector2 temp = new Vector2((width * cellSize) + (cellSize * .5f), (height * cellSize) + (cellSize * .5f));
 
-		return (startPoint + temp);
+		return startPoint + temp;
 	}
 
 
