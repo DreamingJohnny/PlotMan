@@ -4,24 +4,58 @@ using UnityEngine;
 
 public class Cell {
 
+	private Grid parentGrid;
+
+	//TODO: These should get setters ensuring that they stay positive.
+	public int IndexX { get; set; }
+	public int IndexY { get; set; }
+
 	private Vector2 midPoint;
+	public Vector2 MidPoint { get { return midPoint; } }
 
-	private int walkingCost;
+	//Since the pathfinding calculator is currently using the actual dimensions of the grid,
+	//This value might be completely unneccessary.
+	//TODO: look into if it should look at this value instead, if it should be multiplied by this, or what?
+	private int traversalCost;
+	public int TraversalCost { get { return traversalCost; } }
+
+	private int walkingFromStartCost;
+
+	public int WalkingFromStartCost { get { return walkingFromStartCost; } set { walkingFromStartCost = value; } }
+
 	private int heuristicCost;
-	private int totalCost;
+	public int HeuristicCost { get { return heuristicCost; } set { heuristicCost = value; } }
 
+	private int totalCost;
+	public int TotalCost { get { return totalCost; } set { totalCost = value; } }
+
+	//Would there ever actually be a point of doing a getter and setter like this?
+	//Since it doesn't contain any rules for what you may set the value to.
 	private Cell previousCell;
+	public Cell PreviousCell { get { return previousCell; } set { previousCell = value; } }
 
 	private bool isOpenNorth;
-	private bool isOpenEast;
-	private bool isOpenSouth;
-	private bool isOpenWest;
+	public bool IsOpenNorth { get { return isOpenNorth; } }
 
-	public Cell(Vector2 midPoint, int walkingCost, bool isOpenNorth, bool isOpenEast, bool isOpenSouth, bool isOpenWest) {
+	private bool isOpenEast;
+	public bool IsOpenEast { get { return isOpenEast; } }
+
+	private bool isOpenSouth;
+	public bool IsOpenSouth { get { return isOpenSouth; } }
+
+	private bool isOpenWest;
+	public bool IsOpenWest { get { return isOpenWest; } }
+
+
+	public Cell(Grid parentGrid, int indexX, int indexY, Vector2 midPoint, int traversalCost, bool isOpenNorth, bool isOpenEast, bool isOpenSouth, bool isOpenWest) {
+
+		this.parentGrid = parentGrid;
+		IndexX = indexX;
+		IndexY = indexY;
 
 		this.midPoint = midPoint;
 
-		this.walkingCost = walkingCost;
+		this.traversalCost = traversalCost;
 		heuristicCost = 0;
 		totalCost = 0;
 		previousCell = null;
@@ -32,17 +66,7 @@ public class Cell {
 		this.isOpenWest = isOpenWest;
 	}
 
-	public Vector2 MidPoint { get { return midPoint; } }
-
-	public int WalkingCost { get { return walkingCost; } }
-
-	public bool IsOpenNorth { get { return isOpenNorth; } }
-
-	public bool IsOpenEast { get { return isOpenEast; } }
-
-	public bool IsOpenSouth { get { return isOpenSouth; } }
-
-	public bool IsOpenWest { get { return isOpenWest; } }
-
-	public Cell PreviousCell { get { return previousCell; } }
+	public void CalculateTotalCost() {
+		TotalCost = WalkingFromStartCost + HeuristicCost;
+	}
 }

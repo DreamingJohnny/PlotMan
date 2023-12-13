@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3145773276798204741}
   - component: {fileID: 2779601002552293321}
   - component: {fileID: 279597268299318579}
+  - component: {fileID: 5027672250208090651}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -46,10 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  levelHandler: {fileID: 0}
   gridWidth: 18
   gridHeight: 18
   cellSize: 3.2
   startingOffset: {x: -28.6, y: -28.6}
+  pathTester: {fileID: 0}
 --- !u!114 &279597268299318579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,3 +71,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f69c6d5982972684b8bcb9006033f288, type: 2}
   - {fileID: 11400000, guid: d726758c7af29544bbde2f0fa7b5e8e9, type: 2}
   - {fileID: 11400000, guid: d8b84a50271d5a4489eeca304ac30941, type: 2}
+--- !u!114 &5027672250208090651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623193911879805602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54880808136b024cb13464022d64d0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
