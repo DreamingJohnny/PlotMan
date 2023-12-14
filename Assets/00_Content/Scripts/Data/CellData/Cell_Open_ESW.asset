@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Cell_Open_ESW
   m_EditorClassIdentifier: 
   isOpenNorth: 0
-  isOpenEast: 0
+  isOpenEast: 1
   isOpenSouth: 1
   isOpenWest: 1

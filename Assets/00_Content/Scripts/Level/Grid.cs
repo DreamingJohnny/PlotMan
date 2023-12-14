@@ -9,7 +9,7 @@ public class Grid {
 	//TODO: Add contidions to setters here so that they must remain positive
 	private int width;
 	public int Width { get { return width; } set { width = value; } }
-	
+
 	//TODO: Add contidions to setters here so that they must remain positive
 	private int height;
 	public int Height { get { return height; } set { height = value; } }
@@ -54,14 +54,6 @@ public class Grid {
 		}
 	}
 
-	public void DebugShowTextOnCells() {
-		for (int x = 0; x < cells.GetLength(0); x++) {
-			for (int y = 0; y < cells.GetLength(1); y++) {
-				UtilsClass.CreateWorldText(cells[x, y].ToString(), null, GetCellMidPoint(x, y), 20, Color.white, TextAnchor.MiddleCenter);
-			}
-		}
-	}
-
 	private Vector2 SetCellMidPoint(int width, int height) {
 
 		Vector2 temp = new((width * cellSize) + (cellSize * .5f), (height * cellSize) + (cellSize * .5f));
@@ -98,7 +90,7 @@ public class Grid {
 	}
 
 	public Cell GetCell(int x, int y) {
-		return cells[Mathf.CeilToInt(x), Mathf.CeilToInt(y)];
+		return cells[x, y];
 	}
 	//A function that tells you what cell you're in
 }

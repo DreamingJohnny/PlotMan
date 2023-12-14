@@ -6,7 +6,7 @@ public class GameHandler : MonoBehaviour {
 
 	[SerializeField] private PlayerController player;
 
-	[SerializeField] private LevelHandler levelHandler;
+	//[SerializeField] private LevelHandler levelHandler;
 
 	[Header("Grid Settings")]
 	[SerializeField] private int gridWidth;
@@ -22,17 +22,23 @@ public class GameHandler : MonoBehaviour {
 	private Pathfinding pathfinder;
 
 	[SerializeField] private PathTester pathTester;
+	//This is also completely for testing, and should soon be removed.
+	[SerializeField] private EnemyGhost enemyGhost;
 
+	[SerializeField] private List<Vector2> testRoute;
 
 	void Start() {
 		grid = new Grid(gridWidth, gridHeight, cellSize, startingOffset);
-		grid.DebugShowTextOnCells();
 
 		pathfinder = new Pathfinding(grid);
 
 		player.SetPosition(GetCellMidPoint(0, 0));
 
 		pathTester.TestPath(pathfinder, grid);
+
+		enemyGhost.TeleportToCell(grid.GetCell(10, 10));
+
+		enemyGhost.SetRoute(pathfinder.GetPath(enemyGhost.CurrentCell, grid.GetCell(12, 8)));
 	}
 
 	void Update() {
