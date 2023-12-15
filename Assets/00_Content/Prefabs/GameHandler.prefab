@@ -47,12 +47,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  levelHandler: {fileID: 0}
   gridWidth: 18
   gridHeight: 18
-  cellSize: 3.2
-  startingOffset: {x: -28.6, y: -28.6}
-  pathTester: {fileID: 0}
+  cellSize: 3
+  startingOffset: {x: 0, y: 0}
+  pathTester: {fileID: 5027672250208090651}
+  enemyGhost: {fileID: 0}
+  testRoute: []
 --- !u!114 &279597268299318579
 MonoBehaviour:
   m_ObjectHideFlags: 0
