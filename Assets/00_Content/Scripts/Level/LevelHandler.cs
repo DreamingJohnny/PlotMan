@@ -14,8 +14,8 @@ public class LevelHandler : MonoBehaviour {
 	//Later on, it seems logical that these will also become part of the "levelData".
 	//TODO: Also, these should only be able to be ints, never floats, might be worth looking into how to set that up as well.
 	[SerializeField] private Vector2 playerSpawnIndex;
-	[SerializeField] private List<Vector2> enemySpawnIndexes;
-	[SerializeField] private List<Vector2> powerUpSpawnIndexes;
+	//[SerializeField] private List<Vector2> enemySpawnIndexes;
+	//[SerializeField] private List<Vector2> powerUpSpawnIndexes;
 
 	//Later on, this will contain all of the information needed for setting up the maze, including the values currently stored under "Grid Settings".
 	//On top of that, this will later also hold the sprites for the maze.
@@ -37,7 +37,9 @@ public class LevelHandler : MonoBehaviour {
 	}
 
 	public void SetUpLevel() {
-		Grid = new Grid(gridWidth, gridHeight, cellSize, startingOffset);
+		Grid = new Grid(levelData.GridWidth, levelData.GridHeight, levelData.CellSize, levelData.StartingOffset, levelData.SO_CellDatas);
+
+		//So, here we want to go through all of the cells again, so, do a while, while this is less than this, continue, do them one by one...
 
 		pathfinder = new Pathfinding(Grid);
 
@@ -49,7 +51,7 @@ public class LevelHandler : MonoBehaviour {
 	private void SpawnEnemies() {
 		if (enemyGhost == null) return;
 
-		foreach (Vector2 vector2 in enemySpawnIndexes) {
+		foreach (Vector2 vector2 in levelData.EnemySpawnIndexes) {
 			Instantiate(enemyGhost, Grid.GetCellMidPoint(Mathf.CeilToInt(vector2.x), Mathf.CeilToInt(vector2.y)), UnityEngine.Quaternion.identity);
 		}
 	}
@@ -57,7 +59,7 @@ public class LevelHandler : MonoBehaviour {
 	private void SpawnPowerPoints() {
 		if (powerPoint == null) return;
 
-		foreach (Vector2 vector2 in powerUpSpawnIndexes) {
+		foreach (Vector2 vector2 in levelData.PowerPointSpawnIndexes) {
 			Instantiate(powerPoint, Grid.GetCellMidPoint(Mathf.CeilToInt(vector2.x), Mathf.CeilToInt(vector2.y)), UnityEngine.Quaternion.identity);
 		}
 	}

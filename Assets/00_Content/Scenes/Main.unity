@@ -653,61 +653,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: enemyGhost
+      propertyPath: levelData
       value: 
-      objectReference: {fileID: 999662595195577596, guid: 8fac69e8c0c4f3c42b06a08e8bd183c5, type: 3}
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: powerPoint
-      value: 
-      objectReference: {fileID: 7308933886087726812, guid: 37e5deaee5b1bfd49aaf193cee6705f8, type: 3}
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: enemySpawnIndexes.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: powerUpSpawnIndexes.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: enemySpawnIndexes.Array.data[0].x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: enemySpawnIndexes.Array.data[0].y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: powerUpSpawnIndexes.Array.data[0].x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: powerUpSpawnIndexes.Array.data[0].y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: powerUpSpawnIndexes.Array.data[1].x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: powerUpSpawnIndexes.Array.data[1].y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: powerUpSpawnIndexes.Array.data[2].x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: powerUpSpawnIndexes.Array.data[2].y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: powerUpSpawnIndexes.Array.data[3].x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: powerUpSpawnIndexes.Array.data[3].y
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: f55cc28cc66dd7f489fa6dd9da2ae728, type: 2}
     - target: {fileID: 1836654409099153045, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
       propertyPath: m_Name
       value: Level

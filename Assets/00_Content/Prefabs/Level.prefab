@@ -3467,7 +3467,7 @@ Transform:
   - {fileID: 2693507086314949510}
   - {fileID: 7539610431030069258}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &7516923660698328854
 Rigidbody2D:
@@ -3513,9 +3513,16 @@ MonoBehaviour:
   cellSize: 3
   startingOffset: {x: 0, y: 0}
   playerSpawnIndex: {x: 0, y: 0}
-  enemySpawnIndexes: []
-  powerUpSpawnIndexes: []
+  enemySpawnIndexes:
+  - {x: 5, y: 5}
+  powerUpSpawnIndexes:
+  - {x: 1, y: 1}
+  - {x: 2, y: 1}
+  - {x: 3, y: 1}
+  - {x: 4, y: 1}
   levelData: {fileID: 0}
+  powerPoint: {fileID: 7308933886087726812, guid: 37e5deaee5b1bfd49aaf193cee6705f8, type: 3}
+  enemyGhost: {fileID: 999662595195577596, guid: 8fac69e8c0c4f3c42b06a08e8bd183c5, type: 3}
 --- !u!1 &2322032273737820556
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,28 +29,34 @@ public class Grid {
 
 	private Vector2 startPoint;
 
-	public Grid(int width, int height, float cellSize, Vector2 startPoint) {
+	public Grid(int width, int height, float cellSize, Vector2 startPoint, SO_CellData[] sO_CellDatas) {
 		this.width = width;
 		this.height = height;
 		this.cellSize = cellSize;
 
 		this.startPoint = startPoint;
 
-		SetUpCells();
+		SetUpCells(sO_CellDatas);
 	}
 
 	/// <summary>
 	/// Creates a new grid with new cells with new values.
 	/// </summary>
-	private void SetUpCells() {
+	private void SetUpCells(SO_CellData[] sO_CellDatas) {
 
 		//TODO: This function should be able to set up the cells based on what it reads from a data containter, most likely a scriptable object.
 
 		cells = new Cell[width, height];
 
-		for (int x = 0; x < cells.GetLength(0); x++) {
-			for (int y = 0; y < cells.GetLength(1); y++) {
-				cells[x, y] = new Cell(this, x, y, SetCellMidPoint(x, y), 0, true, true, true, true);
+		int i = 0;
+
+		while (i < sO_CellDatas.Length) {
+
+			for (int x = 0; x < cells.GetLength(0); x++) {
+				for (int y = 0; y < cells.GetLength(1); y++) {
+					cells[x, y] = new Cell(this, x, y, SetCellMidPoint(x, y), 0, sO_CellDatas[i].IsOpenNorth, sO_CellDatas[i].IsOpenEast, sO_CellDatas[i].IsOpenSouth, sO_CellDatas[i].IsOpenWest);
+					i++;
+				}
 			}
 		}
 	}
@@ -62,29 +68,26 @@ public class Grid {
 	/// <param name="currentCell"></param>
 	/// <returns></returns>
 	public bool IsDirectionClear(Move_Enum moveDirection, Cell currentCell) {
-		
+
 		switch (moveDirection) {
 			case Move_Enum.NORTH:
 				if (currentCell.IsOpenNorth) return true;
-				break;
+				else return false;
 			case Move_Enum.EAST:
 				if (currentCell.IsOpenEast) return true;
-				break;
+				else return false;
 			case Move_Enum.SOUTH:
 				if (currentCell.IsOpenSouth) return true;
-				break;
+				else return false;
 			case Move_Enum.WEST:
 				if (currentCell.IsOpenWest) return true;
-				break;
+				else return false;
 			case Move_Enum.WAIT:
-				Debug.Log("The player controller just tried to see if the direction was clear on a move with the enum WAIT. This doesn't make sense, and shouldn't happen.");
+				Debug.Log("The PlayerController just tried to see if the direction was clear on a move with the enum WAIT. This doesn't make sense, and shouldn't happen.");
 				return true;
 			default:
 				return false;
 		}
-
-		Debug.Log($"{this} was just given a move_Enum that fell outside of it's switch, this shouldn't happen. It will return false for now, but please investigate.");
-		return false;
 	}
 
 	/// <summary>
@@ -137,17 +140,19 @@ public class Grid {
 	public Cell GetCell(int x, int y) {
 		if (cells[x, y] != null) { return cells[x, y]; }
 		else {
-			if(x > Width) {
+			if (x > Width) {
 				Debug.Log("Tried to get a cell at an index greater than the width of the grid.");
 				return null;
-			} else if(x < 0) {
+			}
+			else if (x < 0) {
 				Debug.Log("Tried to get a cell with a negative width index.");
 				return null;
 			}
 			else if (y > Height) {
 				Debug.Log("Tried to get a cell at an index greater than the height of the grid.");
 				return null;
-			} else if(y < 0) {
+			}
+			else if (y < 0) {
 				Debug.Log("Tried to get a cell with a negative height index.");
 				return null;
 			}
@@ -163,10 +168,10 @@ public class Grid {
 	/// <param name="currentCell"></param>
 	/// <param name="move_Enum"></param>
 	/// <returns></returns>
-	public Cell GetCell(Cell currentCell,Move_Enum move_Enum) {
+	public Cell GetCell(Cell currentCell, Move_Enum move_Enum) {
 		switch (move_Enum) {
 			case Move_Enum.NORTH:
-				if(currentCell.IndexY+1 >= Height) {
+				if (currentCell.IndexY + 1 >= Height) {
 					Debug.Log("The grid has been asked to return a cell that is outside of the grid.");
 					return currentCell;
 				}
@@ -189,7 +194,7 @@ public class Grid {
 					return currentCell;
 				}
 				else {
-					return cells[currentCell.IndexX, currentCell.IndexY-1];
+					return cells[currentCell.IndexX, currentCell.IndexY - 1];
 				}
 
 			case Move_Enum.WEST:
@@ -198,9 +203,9 @@ public class Grid {
 					return currentCell;
 				}
 				else {
-					return cells[currentCell.IndexX-1, currentCell.IndexY];
+					return cells[currentCell.IndexX - 1, currentCell.IndexY];
 				}
-				
+
 			case Move_Enum.WAIT:
 				Debug.Log("The grid is asked to return a cell, but has been given the Wait command, it will return the cell it was given for now.");
 				return currentCell;

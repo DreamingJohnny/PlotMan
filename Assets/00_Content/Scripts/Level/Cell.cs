@@ -69,4 +69,11 @@ public class Cell {
 	public void CalculateTotalCost() {
 		TotalCost = WalkingFromStartCost + HeuristicCost;
 	}
+
+	public void SetCellOpenings(SO_CellData sO_CellData) {
+		isOpenNorth = sO_CellData.IsOpenNorth;
+		isOpenEast = sO_CellData.IsOpenEast;
+		isOpenSouth = sO_CellData.IsOpenSouth;
+		isOpenWest = sO_CellData.IsOpenWest;
+	}
 }
