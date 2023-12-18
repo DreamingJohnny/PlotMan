@@ -76,6 +76,11 @@ public class Pathfinding {
 		return path;
 	}
 
+	/// <summary>
+	/// Returns a list of orthogonally neighbouring cells.
+	/// </summary>
+	/// <param name="cell"></param>
+	/// <returns></returns>
 	private List<Cell> GetNeighbors(Cell cell) {
 		List<Cell> neighbors = new List<Cell>();
 
@@ -110,6 +115,7 @@ public class Pathfinding {
 		return Mathf.CeilToInt(distance);
 	}
 	//TODO: Look at if I actually don't want this one, and instead should just "set" the starting cell, seeing as I already know that I mean.
+	//TODO: This one also has a strange function name, that should be fixed to something more appropriate
 	private Cell GetCurrentCell() {
 		Cell lowestTotalCostCell = openCells[0];
 

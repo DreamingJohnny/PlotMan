@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class MoveButton : MonoBehaviour {
 
-	//So, they each at random gets a move, but they also... they are also turned off for a time when they are used, yes?
-	//Right, so the UIHandler, should probably be the one that tells them when they should turn on again... yeah, that makes sense,
 	//They recieve a new move from the MoveSetter when they are clicked, and the UIHandler gets told, and tells them to turn of for a certain amount of time,
 	//It probably does a IEnumerator for that....
 
@@ -16,7 +14,7 @@ public class MoveButton : MonoBehaviour {
 
 	public event EventHandler<OnMoveButtonPressedEventArgs> OnMoveButtonPressed;
 	public class OnMoveButtonPressedEventArgs : EventArgs {
-		public Vector2 Move;
+		public Move_Enum Move_Enum;
 	}
 
 	private Vector2 move;
@@ -27,8 +25,10 @@ public class MoveButton : MonoBehaviour {
 		}
 	}
 
+	public Move_Enum Move_Enum { get; set; }
+
 	public void SendMoveAction() {
-		OnMoveButtonPressed?.Invoke(this, new OnMoveButtonPressedEventArgs { Move = move });
+		OnMoveButtonPressed?.Invoke(this, new OnMoveButtonPressedEventArgs { Move_Enum = Move_Enum });
 	}
 
 	public void SetNewMoveAction(SO_MoveAction sO_MoveAction) {
@@ -36,5 +36,6 @@ public class MoveButton : MonoBehaviour {
 		GetComponent<Image>().sprite = sO_MoveAction.ButtonSprite;
 
 		move = sO_MoveAction.Move;
+		Move_Enum = sO_MoveAction.Move_Direction;
 	}
 }

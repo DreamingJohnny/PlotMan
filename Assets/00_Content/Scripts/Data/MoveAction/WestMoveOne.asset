@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonSprite: {fileID: 21300000, guid: fa57e1bd3a4bfa7409e7d14b575a3c39, type: 3}
   move: {x: -1, y: 0}
+  move_Direction: 3

@@ -13,7 +13,7 @@ public class EnemyGhost : MonoBehaviour {
 
 	public List<Cell> Route;
 
-	public Cell CurrentCell;
+	public Cell CurrentCell { get; set; }
 
 	public bool HasDestination {
 		get {

@@ -11,10 +11,6 @@ public class LevelHandler : MonoBehaviour {
 	[SerializeField] private float cellSize;
 	[SerializeField] private Vector2 startingOffset;
 
-	//Here I'll make a series of values for things like,
-	//where enemies should spawn,
-	//where the player should spawn,
-	//and where the powers should spawn.
 	//Later on, it seems logical that these will also become part of the "levelData".
 	//TODO: Also, these should only be able to be ints, never floats, might be worth looking into how to set that up as well.
 	[SerializeField] private Vector2 playerSpawnIndex;
@@ -28,10 +24,8 @@ public class LevelHandler : MonoBehaviour {
 	[SerializeField] private PowerPoint powerPoint;
 	[SerializeField] private EnemyGhost enemyGhost;
 
-	private Grid grid;
-
-	//Actually doubtful if this header is needed.
-	[Header("Pathfinding")]
+	public Grid Grid { get; set; }
+	
 	private Pathfinding pathfinder;
 
 	void Start() {
@@ -43,9 +37,9 @@ public class LevelHandler : MonoBehaviour {
 	}
 
 	public void SetUpLevel() {
-		grid = new Grid(gridWidth, gridHeight, cellSize, startingOffset);
+		Grid = new Grid(gridWidth, gridHeight, cellSize, startingOffset);
 
-		pathfinder = new Pathfinding(grid);
+		pathfinder = new Pathfinding(Grid);
 
 		SpawnPowerPoints();
 
@@ -56,7 +50,7 @@ public class LevelHandler : MonoBehaviour {
 		if (enemyGhost == null) return;
 
 		foreach (Vector2 vector2 in enemySpawnIndexes) {
-			Instantiate(enemyGhost, grid.GetCellMidPoint(Mathf.CeilToInt(vector2.x), Mathf.CeilToInt(vector2.y)), UnityEngine.Quaternion.identity);
+			Instantiate(enemyGhost, Grid.GetCellMidPoint(Mathf.CeilToInt(vector2.x), Mathf.CeilToInt(vector2.y)), UnityEngine.Quaternion.identity);
 		}
 	}
 
@@ -64,14 +58,14 @@ public class LevelHandler : MonoBehaviour {
 		if (powerPoint == null) return;
 
 		foreach (Vector2 vector2 in powerUpSpawnIndexes) {
-			Instantiate(powerPoint, grid.GetCellMidPoint(Mathf.CeilToInt(vector2.x), Mathf.CeilToInt(vector2.y)), UnityEngine.Quaternion.identity);
+			Instantiate(powerPoint, Grid.GetCellMidPoint(Mathf.CeilToInt(vector2.x), Mathf.CeilToInt(vector2.y)), UnityEngine.Quaternion.identity);
 		}
 	}
 
 	/// <summary>
 	/// Returns the real-world coordinates for where the player should spawn.
 	/// </summary>	
-	public Vector2 GetPlayerSpawnPoint() {
-		return grid.GetCellMidPoint(Mathf.CeilToInt(playerSpawnIndex.x), Mathf.CeilToInt(playerSpawnIndex.y));
+	public Cell GetPlayerSpawnCell() {
+		return Grid.GetCell(Mathf.CeilToInt(playerSpawnIndex.x), Mathf.CeilToInt(playerSpawnIndex.y));
 	}
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using CodeMonkey.Utils;
+using UnityEngine.EventSystems;
 
 public class Grid {
 	//TODO: Add contidions to setters here so that they must remain positive
@@ -54,6 +55,44 @@ public class Grid {
 		}
 	}
 
+	/// <summary>
+	/// Checks the Move_Enum it recieves against the Move_Enum of the cell, to see if the cell is clear in all four othogonal directions. Returns true or false
+	/// </summary>
+	/// <param name="moveDirection"></param>
+	/// <param name="currentCell"></param>
+	/// <returns></returns>
+	public bool IsDirectionClear(Move_Enum moveDirection, Cell currentCell) {
+		
+		switch (moveDirection) {
+			case Move_Enum.NORTH:
+				if (currentCell.IsOpenNorth) return true;
+				break;
+			case Move_Enum.EAST:
+				if (currentCell.IsOpenEast) return true;
+				break;
+			case Move_Enum.SOUTH:
+				if (currentCell.IsOpenSouth) return true;
+				break;
+			case Move_Enum.WEST:
+				if (currentCell.IsOpenWest) return true;
+				break;
+			case Move_Enum.WAIT:
+				Debug.Log("The player controller just tried to see if the direction was clear on a move with the enum WAIT. This doesn't make sense, and shouldn't happen.");
+				return true;
+			default:
+				return false;
+		}
+
+		Debug.Log($"{this} was just given a move_Enum that fell outside of it's switch, this shouldn't happen. It will return false for now, but please investigate.");
+		return false;
+	}
+
+	/// <summary>
+	/// Calculate a vector for the midpoint of a cell in the grid.
+	/// </summary>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
+	/// <returns></returns>
 	private Vector2 SetCellMidPoint(int width, int height) {
 
 		Vector2 temp = new((width * cellSize) + (cellSize * .5f), (height * cellSize) + (cellSize * .5f));
@@ -89,8 +128,86 @@ public class Grid {
 		}
 	}
 
+	/// <summary>
+	/// Returns the cell at a given index of the grid.
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <returns></returns>
 	public Cell GetCell(int x, int y) {
-		return cells[x, y];
+		if (cells[x, y] != null) { return cells[x, y]; }
+		else {
+			if(x > Width) {
+				Debug.Log("Tried to get a cell at an index greater than the width of the grid.");
+				return null;
+			} else if(x < 0) {
+				Debug.Log("Tried to get a cell with a negative width index.");
+				return null;
+			}
+			else if (y > Height) {
+				Debug.Log("Tried to get a cell at an index greater than the height of the grid.");
+				return null;
+			} else if(y < 0) {
+				Debug.Log("Tried to get a cell with a negative height index.");
+				return null;
+			}
+		}
+
+		Debug.Log("The grid was unable to return a cell for the given index.");
+		return null;
 	}
-	//A function that tells you what cell you're in
+
+	/// <summary>
+	/// Returns the neighbouring cell in the direction given by the Move_Enum as long as it is within the grid.
+	/// </summary>
+	/// <param name="currentCell"></param>
+	/// <param name="move_Enum"></param>
+	/// <returns></returns>
+	public Cell GetCell(Cell currentCell,Move_Enum move_Enum) {
+		switch (move_Enum) {
+			case Move_Enum.NORTH:
+				if(currentCell.IndexY+1 >= Height) {
+					Debug.Log("The grid has been asked to return a cell that is outside of the grid.");
+					return currentCell;
+				}
+				else {
+					return cells[currentCell.IndexX, currentCell.IndexY + 1];
+				}
+
+			case Move_Enum.EAST:
+				if (currentCell.IndexX + 1 >= Width) {
+					Debug.Log("The grid has been asked to return a cell that is outside of the grid.");
+					return currentCell;
+				}
+				else {
+					return cells[currentCell.IndexX + 1, currentCell.IndexY];
+				}
+
+			case Move_Enum.SOUTH:
+				if (currentCell.IndexY - 1 < 0) {
+					Debug.Log("The grid has been asked to return a cell that is outside of the grid.");
+					return currentCell;
+				}
+				else {
+					return cells[currentCell.IndexX, currentCell.IndexY-1];
+				}
+
+			case Move_Enum.WEST:
+				if (currentCell.IndexX - 1 < 0) {
+					Debug.Log("The grid has been asked to return a cell that is outside of the grid.");
+					return currentCell;
+				}
+				else {
+					return cells[currentCell.IndexX-1, currentCell.IndexY];
+				}
+				
+			case Move_Enum.WAIT:
+				Debug.Log("The grid is asked to return a cell, but has been given the Wait command, it will return the cell it was given for now.");
+				return currentCell;
+
+			default:
+				Debug.Log("The grid is asked to return a cell but cannot read the move enum that should govern it");
+				return null;
+		}
+	}
 }
