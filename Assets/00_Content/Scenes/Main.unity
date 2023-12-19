@@ -284,17 +284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c83c7035dc801764cb09315febf01a19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1923459744 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2779601002552293321, guid: e504eb8b246d6b645b049738c39e5492, type: 3}
-  m_PrefabInstance: {fileID: 4820347595022595199}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a87e0ca6bc07f444b41dc44db7d5148, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1385575411336672841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -309,11 +298,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1170293738433557917, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.41
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1170293738433557917, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.08
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1170293738433557917, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -347,30 +336,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2192179854799439209, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
-      propertyPath: m_Size.x
-      value: 1.34
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192179854799439209, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
-      propertyPath: m_Size.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192179854799439209, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192179854799439209, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
-      propertyPath: m_Offset.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3960547035463775330, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
       propertyPath: m_Name
       value: PlotMan
       objectReference: {fileID: 0}
-    - target: {fileID: 9084885807195018271, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
-      propertyPath: gameHandler
-      value: 
-      objectReference: {fileID: 1923459744}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -455,11 +424,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7215925013839937219, guid: 658bf99b2250bae45aebc941899090f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.41
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7215925013839937219, guid: 658bf99b2250bae45aebc941899090f1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.08
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7215925013839937219, guid: 658bf99b2250bae45aebc941899090f1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -520,11 +489,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4987812000111654486, guid: a03bbeadcbec5e44392b725a6b2d3675, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.41
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4987812000111654486, guid: a03bbeadcbec5e44392b725a6b2d3675, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.08
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4987812000111654486, guid: a03bbeadcbec5e44392b725a6b2d3675, type: 3}
       propertyPath: m_LocalPosition.z
@@ -652,10 +621,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 424532693226355621, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
-      propertyPath: levelData
-      value: 
-      objectReference: {fileID: 11400000, guid: f55cc28cc66dd7f489fa6dd9da2ae728, type: 2}
     - target: {fileID: 1836654409099153045, guid: 1c71f3f3466246843a3c5e3980428391, type: 3}
       propertyPath: m_Name
       value: Level

@@ -3513,16 +3513,11 @@ MonoBehaviour:
   cellSize: 3
   startingOffset: {x: 0, y: 0}
   playerSpawnIndex: {x: 0, y: 0}
-  enemySpawnIndexes:
-  - {x: 5, y: 5}
-  powerUpSpawnIndexes:
-  - {x: 1, y: 1}
-  - {x: 2, y: 1}
-  - {x: 3, y: 1}
-  - {x: 4, y: 1}
-  levelData: {fileID: 0}
+  levelData: {fileID: 11400000, guid: f55cc28cc66dd7f489fa6dd9da2ae728, type: 2}
   powerPoint: {fileID: 7308933886087726812, guid: 37e5deaee5b1bfd49aaf193cee6705f8, type: 3}
   enemyGhost: {fileID: 999662595195577596, guid: 8fac69e8c0c4f3c42b06a08e8bd183c5, type: 3}
+  spikes: {fileID: 5630375285867368691, guid: 0e89ea45b8f73c946a1dd7221313d22a, type: 3}
+  pusher: {fileID: 5596356351315518200, guid: 7cc092adfe1e62240ae8fbdf2cccdc6e, type: 3}
 --- !u!1 &2322032273737820556
 GameObject:
   m_ObjectHideFlags: 0
@@ -3595,7 +3590,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 922485507
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: f8aa1c8a358ccd34a8a182677c2eb9db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

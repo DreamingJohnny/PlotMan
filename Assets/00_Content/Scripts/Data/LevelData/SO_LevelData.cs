@@ -18,11 +18,12 @@ public class SO_LevelData : ScriptableObject {
 	[SerializeField] private Vector2 startingOffset;
 	public Vector2 StartingOffset { get { return startingOffset; } }
 
-	//Later on, it seems logical that these will also become part of the "levelData".
+	[Header("CellDatas")]
 	//TODO: Also, these should only be able to be ints, never floats, might be worth looking into how to set that up as well.
 	[SerializeField] private SO_CellData[] sO_CellDatas;
 	public SO_CellData[] SO_CellDatas { get { return sO_CellDatas; } }
 
+	[Header("Spawn Indexes")]
 	[SerializeField] private Vector2 playerSpawnIndex;
 	public Vector2 PlayerSpawnIndex { get { return playerSpawnIndex; } }
 
@@ -32,4 +33,9 @@ public class SO_LevelData : ScriptableObject {
 	[SerializeField] private List<Vector2> powerUpSpawnIndexes;
 	public List<Vector2> PowerPointSpawnIndexes { get { return powerUpSpawnIndexes; } }
 
+	[SerializeField] private List<SO_HazardData> sO_SpikesSpawnDatas;
+	public List<SO_HazardData> SO_SpikesSpawnDatas { get { return sO_SpikesSpawnDatas; } }
+
+	[SerializeField] private List<SO_HazardData> sO_PushersSpawnDatas;
+	public List<SO_HazardData> SO_PushersSpawnDatas { get { return sO_PushersSpawnDatas; } }
 }
