@@ -100,7 +100,7 @@ public class LevelHandler : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Returns the real-world coordinates for where the player should spawn.
+	/// Returns the cell where the player should spawn on the grid.
 	/// </summary>	
 	public Cell GetPlayerSpawnCell() {
 		return Grid.GetCell(Mathf.CeilToInt(levelData.PlayerSpawnIndex.x), Mathf.CeilToInt(levelData.PlayerSpawnIndex.y));
