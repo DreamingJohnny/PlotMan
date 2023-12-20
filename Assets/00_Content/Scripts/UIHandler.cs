@@ -8,8 +8,6 @@ using UnityEngine.UI;
 public class UIHandler : MonoBehaviour {
 
 	//This reference should be moved to the gameHandler later on.
-	//[SerializeField] private PlayerController playerController;
-	//This reference should be moved to the gameHandler later on.
 	[SerializeField] private MoveSetSetter moveSetSetter;
 
 	[SerializeField] private List<Button> moveButtons;

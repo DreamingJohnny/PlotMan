@@ -6,36 +6,23 @@ using UnityEngine;
 
 public class LevelHandler : MonoBehaviour {
 
-	[Header("Grid Settings")]
-	[SerializeField] private int gridWidth;
-	[SerializeField] private int gridHeight;
-	[SerializeField] private float cellSize;
-	[SerializeField] private Vector2 startingOffset;
-
-	//Later on, it seems logical that these will also become part of the "levelData".
-	//TODO: Also, these should only be able to be ints, never floats, might be worth looking into how to set that up as well.
-	[SerializeField] private Vector2 playerSpawnIndex;
-
-	//Later on, this will contain all of the information needed for setting up the maze, including the values currently stored under "Grid Settings".
-	//On top of that, this will later also hold the sprites for the maze.
+	//This will later also hold the sprites for the maze.
 	[SerializeField] SO_LevelData levelData;
+	
+	[SerializeField] private EnemyGhost enemyGhost;
 
 	[SerializeField] private PowerPoint powerPoint;
-	[SerializeField] private EnemyGhost enemyGhost;
-	[SerializeField] private DamageDealer spikes;
+	private GameObject powerPointsParentObject;
+	
+	[SerializeField] private DamageDealer spike;
+	private GameObject spikesParentObject;
+	
 	[SerializeField] private Pusher pusher;
+	private GameObject pushersParentObject;
 
 	public Grid Grid { get; set; }
 	
 	private Pathfinding pathfinder;
-
-	void Start() {
-		
-	}
-
-	void Update() {
-
-	}
 
 	public void SetUpLevel() {
 		Grid = new Grid(levelData.GridWidth, levelData.GridHeight, levelData.CellSize, levelData.StartingOffset, levelData.SO_CellDatas);
@@ -49,17 +36,40 @@ public class LevelHandler : MonoBehaviour {
 		SpawnEnemies();
 	}
 
-	private void SpawnHazards() {
-		foreach (SO_HazardData spikesHazard in levelData.SO_SpikesSpawnDatas) {
-			Instantiate(spikes,
-				Grid.GetCellMidPoint(spikesHazard.IndexX, spikesHazard.IndexY),
-				Quaternion.Euler(GetHazardRotation(spikesHazard)));
+	private void SpawnPowerPoints() {
+		if (powerPoint == null) return;
+
+		powerPointsParentObject = new GameObject();
+
+		foreach (Vector2 vector2 in levelData.PowerPointSpawnIndexes) {
+			Instantiate(powerPoint,
+				Grid.GetCellMidPoint(Mathf.CeilToInt(vector2.x), Mathf.CeilToInt(vector2.y)), 
+				Quaternion.identity,
+				powerPointsParentObject.transform);
 		}
+	}
+
+	private void SpawnHazards() {
+		if (spike == null) return;
+
+		spikesParentObject = new GameObject();
+		
+		foreach (SO_HazardData spikesHazard in levelData.SO_SpikesSpawnDatas) {
+			Instantiate(spike,
+				Grid.GetCellMidPoint(spikesHazard.IndexX, spikesHazard.IndexY),
+				Quaternion.Euler(GetHazardRotation(spikesHazard)),
+			spikesParentObject.transform);
+		}
+
+		if (pusher == null) return;
+
+		pushersParentObject = new GameObject();
 
 		foreach (SO_HazardData pusherHazard in levelData.SO_PushersSpawnDatas) {
 			Instantiate(pusher,
 					Grid.GetCellMidPoint(pusherHazard.IndexX, pusherHazard.IndexY),
-					Quaternion.Euler(GetHazardRotation(pusherHazard)));
+					Quaternion.Euler(GetHazardRotation(pusherHazard)),
+					pushersParentObject.transform);
 		}
 	}
 
@@ -87,18 +97,11 @@ public class LevelHandler : MonoBehaviour {
 		}
 	}
 
-	private void SpawnPowerPoints() {
-		if (powerPoint == null) return;
-
-		foreach (Vector2 vector2 in levelData.PowerPointSpawnIndexes) {
-			Instantiate(powerPoint, Grid.GetCellMidPoint(Mathf.CeilToInt(vector2.x), Mathf.CeilToInt(vector2.y)), UnityEngine.Quaternion.identity);
-		}
-	}
 
 	/// <summary>
 	/// Returns the real-world coordinates for where the player should spawn.
 	/// </summary>	
 	public Cell GetPlayerSpawnCell() {
-		return Grid.GetCell(Mathf.CeilToInt(playerSpawnIndex.x), Mathf.CeilToInt(playerSpawnIndex.y));
+		return Grid.GetCell(Mathf.CeilToInt(levelData.PlayerSpawnIndex.x), Mathf.CeilToInt(levelData.PlayerSpawnIndex.y));
 	}
 }
