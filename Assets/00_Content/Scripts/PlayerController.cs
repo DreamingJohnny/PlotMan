@@ -1,9 +1,15 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 using static MoveButton;
 
 public class PlayerController : MonoBehaviour {
+
+	//So, it needs to access the light object, that is its child
+	//Needs to have a reference to that.
+	//Needs to be able to tell it to be turned on.
+	//Tell it to turn off
 
 	public event EventHandler OnPowerChanged;
 
@@ -20,8 +26,9 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] private Sprite turnedOff;
 
 	[SerializeField] private bool isTurnedOn;
-
 	public bool IsTurnedOn { get { return isTurnedOn; } }
+
+	private Light2DBase playerLight;
 
 	private Rigidbody2D rigidBody2D;
 
@@ -35,6 +42,9 @@ public class PlayerController : MonoBehaviour {
 	public Grid Grid { get; set; }
 
 	private void Start() {
+		playerLight = GetComponentInChildren<Light2DBase>();
+		ChangePlayerLight(false);
+
 		rigidBody2D = GetComponent<Rigidbody2D>();
 
 		moves = new Queue<Move_Enum>();
@@ -53,7 +63,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (IsTurnedOn) {
-			if (currentPower <= 0f) ChangePlayerLight(false);
+			if (currentPower <= 0f) CheckPlayerLight();
 			else {
 				currentPower -= powerDrain * Time.deltaTime;
 				OnPowerChanged(this, EventArgs.Empty);
@@ -93,22 +103,33 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void HandleOnPowerButtonClicked(object sender, EventArgs e) {
-
-		ChangePlayerLight();
+		CheckPlayerLight();
 	}
 
-	private void ChangePlayerLight() {
+	private void CheckPlayerLight() {
 
-		if (IsTurnedOn) { isTurnedOn = false; }
+		if (IsTurnedOn || CurrentPower <= 0f) {
+			isTurnedOn = false;
+			playerLight.enabled = false;
+		}
 		else {
 			isTurnedOn = true;
+			playerLight.enabled = true;
 		}
 
 		SetPlayerSprite();
 	}
 
+	//TODO: I think I can just remove this function now, it shouldn't be in use anywhere since I updated the other version of the function
 	private void ChangePlayerLight(bool value) {
-		isTurnedOn = value;
+		if (CurrentPower <= 0f) {
+			isTurnedOn = false;
+			playerLight.enabled = false;
+		}
+		else {
+			isTurnedOn = value;
+			playerLight.enabled = value;
+		}
 
 		SetPlayerSprite();
 	}
@@ -127,5 +148,4 @@ public class PlayerController : MonoBehaviour {
 		OnPowerChanged?.Invoke(this, EventArgs.Empty);
 		Debug.Log(currentPower);
 	}
-
 }
