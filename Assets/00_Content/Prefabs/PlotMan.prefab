@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6025633799863806399}
   - component: {fileID: 2192179854799439209}
   - component: {fileID: 9084885807195018271}
+  - component: {fileID: 8649350259129626994}
   m_Layer: 0
   m_Name: PlotMan
   m_TagString: Player
@@ -161,12 +162,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032da862f9f8dc2478d0719a0e0c4bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 0
-  currentPower: 0
-  maxPower: 0
-  powerDrain: 0
+  currentPower: 20
+  maxPower: 20
+  powerDrain: 1
   turnedOn: {fileID: 21300000, guid: 2fe748defe15fd743be1b8e0a513ea4c, type: 3}
   turnedOff: {fileID: 21300000, guid: 25ca5d9f40ac2d14697ee0586c95dac3, type: 3}
   isTurnedOn: 0
   waitTime: 3
+--- !u!114 &8649350259129626994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3960547035463775330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcae883289d2ae841ae64074b59ae49d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 10
+  maxHealth: 10

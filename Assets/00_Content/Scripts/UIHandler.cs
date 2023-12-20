@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour {
 
-	[SerializeField] private PlayerController playerController;
+	//This reference should be moved to the gameHandler later on.
+	//[SerializeField] private PlayerController playerController;
 	//This reference should be moved to the gameHandler later on.
 	[SerializeField] private MoveSetSetter moveSetSetter;
 
@@ -18,13 +19,21 @@ public class UIHandler : MonoBehaviour {
 
 	public event EventHandler OnPowerButtonClicked;
 
-
 	void Start() {
 
-		SetUpMoveButtons();
 	}
 
-	private void SetUpMoveButtons() {
+	public void SetUpAllButtons(PlayerController playerController) {
+
+		SetUpMoveButtons(playerController);
+		SetUpPowerButton(playerController);
+		
+		if (playerController.gameObject.TryGetComponent(out Health health)) {
+			SetUpHealthSlider(health);
+		}
+	}
+
+	private void SetUpMoveButtons(PlayerController playerController) {
 
 		foreach (Button button in moveButtons) {
 			if (button.TryGetComponent(out MoveButton component)) {
@@ -34,10 +43,19 @@ public class UIHandler : MonoBehaviour {
 				component.OnMoveButtonPressed += moveSetSetter.HandleOnMoveButtonPressed;
 			}
 		}
+	}
 
+	private void SetUpPowerButton(PlayerController playerController) {
 		OnPowerButtonClicked += playerController.HandleOnPowerButtonClicked;
-		playerController.OnHealthChanged += HandleOnHealthChanged;
 		playerController.OnPowerChanged += HandleOnPowerChanged;
+
+		powerSlider.value = playerController.CurrentPower / playerController.MaxPower;
+	}
+
+	private void SetUpHealthSlider(Health health) {
+		healthSlider.value = health.CurrentHealth / health.MaxHealth;
+
+		health.OnHealthChanged += HandleOnHealthChanged;
 	}
 
 	public void PowerButtonClicked() {
@@ -45,11 +63,14 @@ public class UIHandler : MonoBehaviour {
 	}
 
 	public void HandleOnPowerChanged(object sender, EventArgs e) {
+		PlayerController playerController = (PlayerController)sender;
 
+		powerSlider.value = playerController.CurrentPower / playerController.MaxPower;
 	}
 
 	public void HandleOnHealthChanged(object sender, EventArgs e) {
+		Health health = (Health)sender;
 
-		//So this should look at the sender, and get health, or whatever, from that then?
+		healthSlider.value = health.CurrentHealth / health.MaxHealth;
 	}
 }

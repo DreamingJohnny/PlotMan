@@ -5,19 +5,12 @@ using static MoveButton;
 
 public class PlayerController : MonoBehaviour {
 
-	public event EventHandler OnHealthChanged;
 	public event EventHandler OnPowerChanged;
 
-	[SerializeField] private float health;
-	public float Health { get { return health; } }
-
-	[SerializeField] private float maxHealth;
-	public float MaxHealth { get { return maxHealth; } }
-
-	[SerializeField] private float currentPower;
+	[SerializeField][Min(0)] private float currentPower;
 	public float CurrentPower { get { return currentPower; } }
 
-	[SerializeField] private float maxPower;
+	[SerializeField][Min(0)] private float maxPower;
 	public float MaxPower { get { return maxPower; } }
 
 	[Tooltip("Power amount drained per s while light is active")]
@@ -38,12 +31,6 @@ public class PlayerController : MonoBehaviour {
 	private float timeWaited;
 
 	private Cell currentCell;
-
-	//TODO: Fix so that this is supplied from somewhere instead of being set like this, in a menu.
-	//TODO: Now THIS is where I'm at, currently I dislike how this needs to know about cells and stuff, it should be possible to remake it as a list of vectors, the midpoints,
-	//And then have it move from one of those to the next, I'll fix that tomorrow.
-	//Although, it still needs to know about the grid, because it needs to be able to talk to it's own cell...
-	//No, I'm wrong, it needs the grid thingy to be set, so it needs a collection to it here.
 
 	public Grid Grid { get; set; }
 
@@ -69,6 +56,7 @@ public class PlayerController : MonoBehaviour {
 			if (currentPower <= 0f) ChangePlayerLight(false);
 			else {
 				currentPower -= powerDrain * Time.deltaTime;
+				OnPowerChanged(this, EventArgs.Empty);
 			}
 		}
 	}
@@ -78,7 +66,7 @@ public class PlayerController : MonoBehaviour {
 			Move_Enum moveDirection = moves.Dequeue();
 
 			if (Grid.IsDirectionClear(moveDirection, currentCell)) {
-				
+
 				//So, here I want to, in the end, do a list of cells, based on the list of moves, so it should return a cell, and then I can begin to move towards that cell.
 				//To return a cell it needs an index, the index is the index of my current cell, but also, I need to add for the move, but I don't know which is the x and which is the y...
 				//So, do I need to set up variables for these things? send in the move Direction and get back... two values? Hm. I suppose I could return a vector2, although it bothers me,
@@ -140,9 +128,4 @@ public class PlayerController : MonoBehaviour {
 		Debug.Log(currentPower);
 	}
 
-	public void TakeDamage(float value) {
-		health -= value;
-		OnHealthChanged?.Invoke(this, EventArgs.Empty);
-		Debug.Log(health);
-	}
 }

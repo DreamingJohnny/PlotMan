@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2779601002552293321
 MonoBehaviour:
@@ -47,13 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  gridWidth: 18
-  gridHeight: 18
-  cellSize: 3
-  startingOffset: {x: 0, y: 0}
-  pathTester: {fileID: 5027672250208090651}
-  enemyGhost: {fileID: 0}
-  testRoute: []
+  levelHandler: {fileID: 0}
+  uIHandler: {fileID: 0}
 --- !u!114 &279597268299318579
 MonoBehaviour:
   m_ObjectHideFlags: 0

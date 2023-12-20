@@ -22,7 +22,7 @@ public class LevelHandler : MonoBehaviour {
 
 	[SerializeField] private PowerPoint powerPoint;
 	[SerializeField] private EnemyGhost enemyGhost;
-	[SerializeField] private Spikes spikes;
+	[SerializeField] private DamageDealer spikes;
 	[SerializeField] private Pusher pusher;
 
 	public Grid Grid { get; set; }
