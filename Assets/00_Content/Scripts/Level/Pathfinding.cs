@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Pathfinding {
@@ -41,7 +43,7 @@ public class Pathfinding {
 				if (closedCells.Contains(neighbour)) continue;
 
 				int checkWalkFromStarCost = currentCell.WalkingFromStartCost + GetOrthogonalDistanceBetween(currentCell.MidPoint, neighbour.MidPoint);
-				if(checkWalkFromStarCost < neighbour.WalkingFromStartCost) {
+				if (checkWalkFromStarCost < neighbour.WalkingFromStartCost) {
 					neighbour.PreviousCell = currentCell;
 					neighbour.WalkingFromStartCost = checkWalkFromStarCost;
 					neighbour.HeuristicCost = GetOrthogonalDistanceBetween(neighbour.MidPoint, goal.MidPoint);
@@ -76,6 +78,19 @@ public class Pathfinding {
 		return path;
 	}
 
+	public void HandleOnDestinationReached(object sender, EventArgs e) {
+		EnemyGhost enemyGhost = (EnemyGhost)sender;
+
+		enemyGhost.SetRoute(GetPath(enemyGhost.CurrentCell, GetRandomDestination(enemyGhost.CurrentCell)));
+	}
+
+	private Cell GetRandomDestination(Cell currentCell) {
+		//TODO: No! Wait, this does not work! Needs to be redone!
+		//TODO: So this needs to check if these values are suitable, and if they are the same as where the enemyGhost currently is.
+		return grid.GetCell(UnityEngine.Random.Range(0, grid.Height),
+							UnityEngine.Random.Range(0, grid.Width));
+	}
+
 	/// <summary>
 	/// Returns a list of orthogonally neighbouring cells.
 	/// </summary>
@@ -96,7 +111,7 @@ public class Pathfinding {
 			neighbors.Add(grid.GetCell(cell.IndexX, cell.IndexY - 1));
 		}
 
-		if (cell.IsOpenSouth && cell.IndexX - 1 > 0) {
+		if (cell.IsOpenWest && cell.IndexX - 1 > 0) {
 			neighbors.Add(grid.GetCell(cell.IndexX - 1, cell.IndexY));
 		}
 

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpenNorth: 1
   isOpenEast: 0
-  isOpenSouth: 1
-  isOpenWest: 0
+  isOpenSouth: 0
+  isOpenWest: 1

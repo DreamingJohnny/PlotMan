@@ -27,6 +27,9 @@ public class Grid {
 
 	private Cell[,] cells;
 
+	/// <summary>
+	/// The coordinates the grid should begin from creating the cells from.
+	/// </summary>
 	private Vector2 startPoint;
 
 	public Grid(int width, int height, float cellSize, Vector2 startPoint, SO_CellData[] sO_CellDatas) {
@@ -215,4 +218,5 @@ public class Grid {
 				return null;
 		}
 	}
+
 }

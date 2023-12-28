@@ -11,6 +11,11 @@ public class LevelHandler : MonoBehaviour {
 
 	[SerializeField] private EnemyGhost enemyGhost;
 
+	/// <summary>
+	/// The minimum distance in both x and y between the cell where the enemy currently is, and the destination it will be sent to next.
+	/// </summary>
+	[SerializeField] private int minimalDistance;
+
 	[SerializeField] private PowerPoint powerPoint;
 	private GameObject powerPointsParentObject;
 
@@ -92,10 +97,15 @@ public class LevelHandler : MonoBehaviour {
 	}
 
 	private void SpawnEnemies() {
-		if (enemyGhost == null) return;
+		if (enemyGhost == null) {
+			Debug.Log($"{name} did not have a reference to the enemy prefab that it tried to spawn");
+			return;
+		}
 
 		foreach (Vector2 vector2 in levelData.EnemySpawnIndexes) {
-			Instantiate(enemyGhost, Grid.GetCellMidPoint(Mathf.CeilToInt(vector2.x), Mathf.CeilToInt(vector2.y)), UnityEngine.Quaternion.identity);
+			EnemyGhost temp = Instantiate(enemyGhost, Grid.GetCellMidPoint(Mathf.CeilToInt(vector2.x), Mathf.CeilToInt(vector2.y)), UnityEngine.Quaternion.identity);
+			temp.CurrentCell = Grid.GetCell(Mathf.CeilToInt(vector2.x), Mathf.CeilToInt(vector2.y));
+			temp.OnNeedsDestination += pathfinder.HandleOnDestinationReached;
 		}
 	}
 
