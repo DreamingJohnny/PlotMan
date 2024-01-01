@@ -341,7 +341,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b12370eb1eef5494ebd808f550cb276c, type: 2}
   - {fileID: 11400000, guid: a35f8da3187f90d4385bb385d42c06d3, type: 2}
   - {fileID: 11400000, guid: 428d39172b4d23841a75951dcc716fa3, type: 2}
-  playerSpawnIndex: {x: 0, y: 0}
+  playerSpawnIndex: {x: 0, y: 5}
   enemySpawnIndexes:
   - {x: 0, y: 5}
   - {x: 0, y: 11}

@@ -105,7 +105,7 @@ public class LevelHandler : MonoBehaviour {
 		foreach (Vector2 vector2 in levelData.EnemySpawnIndexes) {
 			EnemyGhost temp = Instantiate(enemyGhost, Grid.GetCellMidPoint(Mathf.CeilToInt(vector2.x), Mathf.CeilToInt(vector2.y)), UnityEngine.Quaternion.identity);
 			temp.CurrentCell = Grid.GetCell(Mathf.CeilToInt(vector2.x), Mathf.CeilToInt(vector2.y));
-			temp.OnNeedsDestination += pathfinder.HandleOnDestinationReached;
+			temp.OnNeedsDestination += pathfinder.HandleOnNeedsDestination;
 		}
 	}
 

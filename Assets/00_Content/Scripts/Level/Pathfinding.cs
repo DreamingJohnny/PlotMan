@@ -77,10 +77,15 @@ public class Pathfinding {
 		return path;
 	}
 
-	public void HandleOnDestinationReached(object sender, EventArgs e) {
+	public void HandleOnNeedsDestination(object sender, EventArgs e) {
 		EnemyGhost enemyGhost = (EnemyGhost)sender;
 
-		enemyGhost.SetRoute(GetPath(enemyGhost.CurrentCell, GetRandomDestination(enemyGhost.CurrentCell)));
+		if (enemyGhost.QuarryCell != null) {
+			enemyGhost.SetRoute(GetPath(enemyGhost.CurrentCell, enemyGhost.QuarryCell));
+		}
+		else {
+			enemyGhost.SetRoute(GetPath(enemyGhost.CurrentCell, GetRandomDestination(enemyGhost.CurrentCell)));
+		}
 	}
 
 	private Cell GetRandomDestination(Cell currentCell) {

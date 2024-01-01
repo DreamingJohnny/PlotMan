@@ -47,8 +47,6 @@ public class Grid {
 	/// </summary>
 	private void SetUpCells(SO_CellData[] sO_CellDatas) {
 
-		//TODO: This function should be able to set up the cells based on what it reads from a data containter, most likely a scriptable object.
-
 		cells = new Cell[width, height];
 
 		int i = 0;

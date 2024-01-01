@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] private bool isTurnedOn;
 	public bool IsTurnedOn { get { return isTurnedOn; } }
 
-	private Light2DBase playerLight;
+	private PlayerLight playerLight;
 
 	private Rigidbody2D rigidBody2D;
 
@@ -39,11 +39,13 @@ public class PlayerController : MonoBehaviour {
 
 	private Cell currentCell;
 
+	public Cell CurrentCell { get { return currentCell; } }
+
 	public Grid Grid { get; set; }
 
-	private void Start() {
-		playerLight = GetComponentInChildren<Light2DBase>();
-		ChangePlayerLight(false);
+	private void OnEnable() {
+		playerLight = GetComponentInChildren<PlayerLight>();
+		Debug.Assert(playerLight != null);
 
 		rigidBody2D = GetComponent<Rigidbody2D>();
 
@@ -52,7 +54,9 @@ public class PlayerController : MonoBehaviour {
 
 	public void TeleportToCell(Cell cell) {
 		currentCell = cell;
-		transform.position = cell.MidPoint;
+
+		transform.position = currentCell.MidPoint;
+		playerLight.SetCurrentCell(currentCell);
 	}
 
 	private void Update() {
@@ -63,7 +67,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (IsTurnedOn) {
-			if (currentPower <= 0f) CheckPlayerLight();
+			if (currentPower <= 0f) UpdatePlayerLight();
 			else {
 				currentPower -= powerDrain * Time.deltaTime;
 				OnPowerChanged(this, EventArgs.Empty);
@@ -88,8 +92,9 @@ public class PlayerController : MonoBehaviour {
 				//Later on, this shouldn't be set here, but should instead be set once the player object has reached the cell in question.
 				//Which should probably be part of the update loop? Or should there be something in the update loop that looks at if the move is finished, while the move is being carried out by a coroutine?
 				currentCell = destination;
-			}
 
+				playerLight.SetCurrentCell(currentCell);
+			}
 		}
 	}
 
@@ -103,32 +108,18 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void HandleOnPowerButtonClicked(object sender, EventArgs e) {
-		CheckPlayerLight();
+		UpdatePlayerLight();
 	}
 
-	private void CheckPlayerLight() {
+	private void UpdatePlayerLight() {
 
 		if (IsTurnedOn || CurrentPower <= 0f) {
 			isTurnedOn = false;
-			playerLight.enabled = false;
+			playerLight.TurnOnLight(IsTurnedOn);
 		}
 		else {
 			isTurnedOn = true;
-			playerLight.enabled = true;
-		}
-
-		SetPlayerSprite();
-	}
-
-	//TODO: I think I can just remove this function now, it shouldn't be in use anywhere since I updated the other version of the function
-	private void ChangePlayerLight(bool value) {
-		if (CurrentPower <= 0f) {
-			isTurnedOn = false;
-			playerLight.enabled = false;
-		}
-		else {
-			isTurnedOn = value;
-			playerLight.enabled = value;
+			playerLight.TurnOnLight(IsTurnedOn);
 		}
 
 		SetPlayerSprite();

@@ -167,46 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &796262357 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4762536834532520452, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
-  m_PrefabInstance: {fileID: 1385575411336672841}
-  m_PrefabAsset: {fileID: 0}
---- !u!58 &796262360
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796262357}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 11.75
 --- !u!114 &919655778 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9084885807195018271, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
@@ -500,17 +460,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlotMan
       objectReference: {fileID: 0}
-    - target: {fileID: 9084885807195018271, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
-      propertyPath: waitTime
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4762536834532520452, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 796262360}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f39264b7e63b71f44aafbe67972f39d3, type: 3}
 --- !u!1001 &3854967669436517387
 PrefabInstance:
@@ -717,7 +670,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5027672250208090651, guid: e504eb8b246d6b645b049738c39e5492, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

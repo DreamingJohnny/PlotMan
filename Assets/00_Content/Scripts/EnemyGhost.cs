@@ -18,6 +18,12 @@ public class EnemyGhost : MonoBehaviour {
 
 	public Cell CurrentCell { get; set; }
 
+
+	//However, there is a problem with when this value should be set, and how, so this cell should be set to null when? As soon as the enemy has received a route?
+	//When the light goes out?
+	private Cell quarryCell;
+	public Cell QuarryCell { get { return quarryCell; } }
+
 	public bool HasDestination {
 		get {
 			if (Route != null && Route.Count > 0) {
@@ -40,9 +46,12 @@ public class EnemyGhost : MonoBehaviour {
 		}
 	}
 
-	void Start() {
+	private void OnEnable() {
 		rigidBody2D = GetComponent<Rigidbody2D>();
 		Debug.Assert(rigidBody2D);
+
+		//TODO: This might be very unneccessary, right? Should I remove it completely maybe?
+		quarryCell = null;
 	}
 
 	private void FixedUpdate() {
@@ -57,6 +66,20 @@ public class EnemyGhost : MonoBehaviour {
 
 	public void SetRoute(List<Cell> cells) {
 		Route = cells;
+	}
+
+	public void SetQuarry(Cell cell) {
+		//So this enemy should now send up an event with a cell, and ask if it could get a route?
+		
+		//So, this one should then also be used to set the cell to null? Yeah, so it is set to null when the light is turned off then?
+
+		//So, this one gets a quarry, sets it, and then asks for a 
+
+		quarryCell = cell;
+
+		//If the quarryCell isn't null, then that means that it has been updated, and so a new route is needed,
+		//If QuarryCell is null, then the ghost should continue towards it's latest destination
+		if(QuarryCell != null) OnNeedsDestination?.Invoke(this, EventArgs.Empty);
 	}
 
 	private void DoMove() {
