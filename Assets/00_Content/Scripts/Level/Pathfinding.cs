@@ -32,7 +32,6 @@ public class Pathfinding {
 		while (openCells.Count > 0) {
 			Cell currentCell = GetCurrentCell();
 			if (currentCell == goal) {
-				Debug.Log("You've reached the end goal!");
 				return CalculatePath(goal);
 			}
 
@@ -57,7 +56,7 @@ public class Pathfinding {
 		}
 
 
-		Debug.Log($"The pathfinder was unable to find a path that reached the goal.");
+		Debug.Log($"The pathfinder was unable to find a path that reached between cell x: {start.IndexX}, y: {start.IndexY} & cell x:{goal.IndexX}, y: {goal.IndexY}.");
 		return null;
 	}
 
